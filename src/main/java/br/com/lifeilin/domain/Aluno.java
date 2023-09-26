@@ -1,42 +1,39 @@
 package br.com.lifeilin.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Unidade implements Serializable {
-	
+public class Aluno implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	private String email;	
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "unidade")
-	private List<Aluno> alunos = new ArrayList<Aluno>();
+	@ManyToOne
+	@JoinColumn(name = "unidade_id")
+	private Unidade unidade;
 	
-	public Unidade() {
+	public Aluno() {
 		super();
 	}
 
-	public Unidade(Integer id, String nome) {
+	public Aluno(Integer id, String nome, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.email = email;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -53,15 +50,23 @@ public class Unidade implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Unidade getUnidade() {
+		return unidade;
+	}
+
+	public void setUnidade(Unidade unidade) {
+		this.unidade = unidade;
+	}
 	
-	public List<Aluno> getAlunos() {
-		return alunos;
-	}
-
-	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -78,7 +83,7 @@ public class Unidade implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Unidade other = (Unidade) obj;
+		Aluno other = (Aluno) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
