@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.lifeilin.domain.Unidade;
 import br.com.lifeilin.repositories.UnidadeRepository;
+import br.com.lifeilin.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class UnidadeService {
@@ -17,6 +18,6 @@ public class UnidadeService {
 	public Unidade buscar(Integer id) {
 		
 		Optional<Unidade> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: "+id+", Tipo: "+Unidade.class.getName()));
 	}
 }
