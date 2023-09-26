@@ -8,8 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.lifeilin.domain.Aluno;
+import br.com.lifeilin.domain.Faixa;
+import br.com.lifeilin.domain.Tecnica;
 import br.com.lifeilin.domain.Unidade;
 import br.com.lifeilin.repositories.AlunoRepository;
+import br.com.lifeilin.repositories.FaixaRepository;
+import br.com.lifeilin.repositories.TecnicaRepository;
 import br.com.lifeilin.repositories.UnidadeRepository;
 
 @SpringBootApplication
@@ -20,6 +24,12 @@ public class LifeilinApplication implements CommandLineRunner{
 	
 	@Autowired
 	private AlunoRepository alunoRepository;
+	
+	@Autowired
+	private FaixaRepository faixaRepository;
+	
+	@Autowired
+	private TecnicaRepository tecnicaRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(LifeilinApplication.class, args);
@@ -46,6 +56,22 @@ public class LifeilinApplication implements CommandLineRunner{
 		
 		unidadeRepository.saveAll(Arrays.asList(matriz, aricanduva));
 		alunoRepository.saveAll(Arrays.asList(a1, a2, a3, a4));
+		
+		
+		Faixa branca = new Faixa(null, "Branca");
+		Faixa amarela = new Faixa(null, "Amarela");
+		
+		Tecnica jibenbaxi = new Tecnica(null, "Ji Ben Ba Xi");
+		Tecnica xiaosishou = new Tecnica(null, "Xiao si Shou");
+		
+		branca.getTecnicas().addAll(Arrays.asList(jibenbaxi));
+		amarela.getTecnicas().addAll(Arrays.asList(xiaosishou));
+		
+		jibenbaxi.setFaixa(branca);
+		xiaosishou.setFaixa(amarela);
+		
+		faixaRepository.saveAll(Arrays.asList(branca, amarela));
+		tecnicaRepository.saveAll(Arrays.asList(jibenbaxi, xiaosishou));
 	}
 
 }

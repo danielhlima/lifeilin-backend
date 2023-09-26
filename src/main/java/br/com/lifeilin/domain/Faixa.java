@@ -13,8 +13,8 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Unidade implements Serializable {
-	
+public class Faixa implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -23,14 +23,14 @@ public class Unidade implements Serializable {
 	private String nome;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "unidade")
-	private List<Aluno> alunos = new ArrayList<Aluno>();
+	@OneToMany(mappedBy = "faixa")
+	private List<Tecnica>tecnicas = new ArrayList<Tecnica>();
 	
-	public Unidade() {
+	public Faixa() {
 		super();
 	}
 
-	public Unidade(Integer id, String nome) {
+	public Faixa(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -51,13 +51,13 @@ public class Unidade implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public List<Aluno> getAlunos() {
-		return alunos;
+
+	public List<Tecnica> getTecnicas() {
+		return tecnicas;
 	}
 
-	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
+	public void setTecnicas(List<Tecnica> tecnicas) {
+		this.tecnicas = tecnicas;
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class Unidade implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Unidade other = (Unidade) obj;
+		Faixa other = (Faixa) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

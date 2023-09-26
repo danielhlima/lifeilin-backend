@@ -1,20 +1,17 @@
 package br.com.lifeilin.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Unidade implements Serializable {
-	
+public class Tecnica implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -22,15 +19,15 @@ public class Unidade implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "unidade")
-	private List<Aluno> alunos = new ArrayList<Aluno>();
+	@ManyToOne
+	@JoinColumn(name = "faixa_id")
+	private Faixa faixa;
 	
-	public Unidade() {
+	public Tecnica() {
 		super();
 	}
 
-	public Unidade(Integer id, String nome) {
+	public Tecnica(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -51,13 +48,13 @@ public class Unidade implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public List<Aluno> getAlunos() {
-		return alunos;
+
+	public Faixa getFaixa() {
+		return faixa;
 	}
 
-	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
+	public void setFaixa(Faixa faixa) {
+		this.faixa = faixa;
 	}
 
 	@Override
@@ -76,7 +73,7 @@ public class Unidade implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Unidade other = (Unidade) obj;
+		Tecnica other = (Tecnica) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
