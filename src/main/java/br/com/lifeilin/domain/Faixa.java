@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Faixa implements Serializable {
@@ -22,8 +24,8 @@ public class Faixa implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "faixa")
+	@JsonManagedReference
+	@OneToMany(mappedBy = "faixa", fetch = FetchType.EAGER)
 	private List<Tecnica>tecnicas = new ArrayList<Tecnica>();
 	
 	public Faixa() {
