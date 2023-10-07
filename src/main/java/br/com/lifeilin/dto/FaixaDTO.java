@@ -13,7 +13,7 @@ public class FaixaDTO implements Serializable {
 	private Integer id;
 	
 	@NotEmpty(message="Preenchimento obrigatório.")
-	@Length(min=4, max=30, message="O tamanho deste campo deve estar entre 5 e 30 caractéres.")
+	@Length(min=4, max=30, message="O tamanho deste campo deve estar entre 4 e 30 caractéres.")
 	private String nome;
 	
 	public FaixaDTO() {}
