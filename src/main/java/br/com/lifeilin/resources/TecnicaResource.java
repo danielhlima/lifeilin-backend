@@ -24,7 +24,7 @@ public class TecnicaResource {
 	private TecnicaService service;
 	
 	@GetMapping(value="/{id}")
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Tecnica> find(@PathVariable Integer id) {
 		Tecnica obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj); 
 	}

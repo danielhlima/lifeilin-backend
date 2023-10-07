@@ -15,13 +15,18 @@ public class FaixaService {
 	@Autowired
 	private FaixaRepository repo;
 	
-	public Faixa buscar(Integer id) {
+	public Faixa find(Integer id) {
 		Optional<Faixa> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: "+id+", Tipo: "+Faixa.class.getName()));
 	}
 	
-	public Faixa insert (Faixa obj) {
+	public Faixa insert(Faixa obj) {
 		obj.setId(null);
+		return repo.save(obj);
+	}
+	
+	public Faixa update(Faixa obj) {
+		find(obj.getId());
 		return repo.save(obj);
 	}
 }

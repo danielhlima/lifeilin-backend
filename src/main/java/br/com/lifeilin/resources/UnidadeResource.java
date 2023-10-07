@@ -19,7 +19,7 @@ public class UnidadeResource {
 	private UnidadeService service;
 	
 	@GetMapping(value="/{id}")
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Unidade> find(@PathVariable Integer id) {
 		Unidade obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj); 
 	}
