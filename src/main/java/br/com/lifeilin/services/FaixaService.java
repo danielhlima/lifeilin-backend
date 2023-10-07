@@ -1,5 +1,6 @@
 package br.com.lifeilin.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,9 @@ public class FaixaService {
 		}catch(DataIntegrityViolationException ex) {
 			throw new DataIntegrityException("Não é possível excluir uma Faixa que possui Técnicas.");
 		}
+	}
+
+	public List<Faixa> findAll() {
+		return repo.findAll();
 	}
 }
