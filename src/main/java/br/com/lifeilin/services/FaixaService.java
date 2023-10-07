@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.lifeilin.domain.Faixa;
+import br.com.lifeilin.dto.FaixaDTO;
 import br.com.lifeilin.repositories.FaixaRepository;
 import br.com.lifeilin.services.exceptions.DataIntegrityException;
 import br.com.lifeilin.services.exceptions.ObjectNotFoundException;
@@ -44,5 +45,9 @@ public class FaixaService {
 
 	public List<Faixa> findAll() {
 		return repo.findAll();
+	}
+	
+	public Faixa fromDTO(FaixaDTO objDTO) {
+		return new Faixa(objDTO.getId(), objDTO.getNome());
 	}
 }

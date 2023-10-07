@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +37,8 @@ public class FaixaResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> insert (@RequestBody Faixa obj){
+	public ResponseEntity<Void> insert (@Valid @RequestBody FaixaDTO objDto){
+		Faixa obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -43,11 +46,10 @@ public class FaixaResource {
 	}
 	
 	@PutMapping(value="/{id}")
-	public ResponseEntity<Void> update(@RequestBody Faixa obj, @PathVariable Integer id){
+	public ResponseEntity<Void> update(@Valid @RequestBody FaixaDTO objDto, @PathVariable Integer id){
+		Faixa obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.noContent().build();
 	}
 	
