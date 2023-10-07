@@ -19,4 +19,9 @@ public class TecnicaService {
 		Optional<Tecnica> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: "+id+", Tipo: "+Tecnica.class.getName()));
 	}
+	
+	public Tecnica insert(Tecnica obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
 }

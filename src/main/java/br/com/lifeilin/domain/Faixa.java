@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@Entity
+@Entity //Equivalente a categoria no curso do Nélio
 public class Faixa implements Serializable {
 
 	private static final long serialVersionUID = 1L;

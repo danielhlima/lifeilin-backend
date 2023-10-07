@@ -19,4 +19,9 @@ public class FaixaService {
 		Optional<Faixa> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: "+id+", Tipo: "+Faixa.class.getName()));
 	}
+	
+	public Faixa insert (Faixa obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
 }
