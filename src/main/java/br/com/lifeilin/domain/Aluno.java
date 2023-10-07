@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Aluno implements Serializable {
 
@@ -18,8 +20,13 @@ public class Aluno implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String email;	
+	private String email;
 	
+	
+	@ManyToOne
+	@JoinColumn(name = "faixa_id", nullable = true)
+	private Faixa faixa;
+
 	@ManyToOne
 	@JoinColumn(name = "unidade_id")
 	private Unidade unidade;
@@ -33,6 +40,15 @@ public class Aluno implements Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
+	}
+
+	public Aluno(Integer id, String nome, String email, Faixa faixa, Unidade unidade) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.faixa = faixa;
+		this.unidade = unidade;
 	}
 
 	public Integer getId() {
@@ -65,6 +81,14 @@ public class Aluno implements Serializable {
 
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
+	}
+	
+	public Faixa getFaixa() {
+		return faixa;
+	}
+
+	public void setFaixa(Faixa faixa) {
+		this.faixa = faixa;
 	}
 	
 	@Override

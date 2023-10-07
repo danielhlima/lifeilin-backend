@@ -52,11 +52,7 @@ public class LifeilinApplication implements CommandLineRunner{
 		a1.setUnidade(matriz);
 		a2.setUnidade(matriz);
 		a3.setUnidade(aricanduva);
-		a4.setUnidade(aricanduva);
-		
-		unidadeRepository.saveAll(Arrays.asList(matriz, aricanduva));
-		alunoRepository.saveAll(Arrays.asList(a1, a2, a3, a4));
-		
+		a4.setUnidade(aricanduva);	
 		
 		Faixa branca = new Faixa(null, "Branca");
 		Faixa amarela = new Faixa(null, "Amarela");
@@ -72,6 +68,14 @@ public class LifeilinApplication implements CommandLineRunner{
 		
 		faixaRepository.saveAll(Arrays.asList(branca, amarela));
 		tecnicaRepository.saveAll(Arrays.asList(jibenbaxi, xiaosishou));
+		
+		a1.setFaixa(branca);
+		a2.setFaixa(amarela);
+		a3.setFaixa(branca);
+		a4.setFaixa(amarela);
+		
+		unidadeRepository.saveAll(Arrays.asList(matriz, aricanduva));
+		alunoRepository.saveAll(Arrays.asList(a1, a2, a3, a4));
 	}
 
 }

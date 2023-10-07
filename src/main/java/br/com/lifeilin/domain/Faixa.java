@@ -24,9 +24,12 @@ public class Faixa implements Serializable {
 	private Integer id;
 	private String nome;
 	
-	@JsonManagedReference
 	@OneToMany(mappedBy = "faixa", fetch = FetchType.EAGER)
 	private List<Tecnica>tecnicas = new ArrayList<Tecnica>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "unidade")
+	private List<Aluno> alunos = new ArrayList<Aluno>();
 	
 	public Faixa() {
 		super();
